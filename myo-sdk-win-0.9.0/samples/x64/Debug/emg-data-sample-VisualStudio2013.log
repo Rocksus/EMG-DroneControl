@@ -1,0 +1,8 @@
+﻿  emg-data-sample.cpp
+D:\Documents\Codes\myo-sdk-win-0.9.0\include\myo\cxx\detail\ThrowOnError.hpp(39,1): warning C4297:  'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+D:\Documents\Codes\myo-sdk-win-0.9.0\include\myo\cxx\detail\ThrowOnError.hpp(39,1): message :  destructor or deallocator has a (possibly implicit) non-throwing exception specification
+D:\Documents\Codes\myo-sdk-win-0.9.0\include\myo\cxx\detail\ThrowOnError.hpp(45,1): warning C4297:  'myo::ThrowOnError::~ThrowOnError': function assumed not to throw an exception but does
+D:\Documents\Codes\myo-sdk-win-0.9.0\include\myo\cxx\detail\ThrowOnError.hpp(45,1): message :  destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  emg-data-sample-VisualStudio2013.vcxproj -> D:\Documents\Codes\myo-sdk-win-0.9.0\samples\x64\Debug\emg-data-sample-VisualStudio2013.exe
+  Copy required dlls to output directory
+          1 file(s) copied.
