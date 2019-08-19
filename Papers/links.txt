@@ -1,0 +1,6 @@
+links:
+https://developerblog.myo.com/myo-bluetooth-spec-released/
+Dronekit.io
+http://ardupilot.org/planner/
+https://mavlink.io/en/messages/common.html
+https://keras.io/layers/recurrent/
