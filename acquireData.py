@@ -5,9 +5,7 @@ import inspect
 import sys
 import keyboard
 import matplotlib.pyplot as plt
-from Profile import Profile
 import os
-import pandas
 import numpy as np
 import time
 

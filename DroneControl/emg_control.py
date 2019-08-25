@@ -10,7 +10,7 @@ from keras.models import load_model
 from collections import deque
 import numpy as np
 
-sampleLength = 32
+sampleLength = 48
 
 
 def arm_and_takeoff(vehicle,aTargetAltitude):
@@ -128,10 +128,10 @@ if __name__ == '__main__':
 			send_ned_velocity(vehicle, 0, 0, gnd_speed)
 		elif(gesture_names[prediction[0]]=='Hold_Left'):
 			# Tilt Left
-			send_ned_velocity(vehicle, -gnd_speed, 0, 0)
+			send_ned_velocity(vehicle, gnd_speed, 0, 0)
 		elif(gesture_names[prediction[0]]=='Hold_Right'):
 			# Tilt Right
-			send_ned_velocity(vehicle, gnd_speed, 0, 0)
+			send_ned_velocity(vehicle, -gnd_speed, 0, 0)
 		elif(gesture_names[prediction[0]]=='Flower'):
 			# Move Back
 			send_ned_velocity(vehicle, 0, -gnd_speed, 0)
