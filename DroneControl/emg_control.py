@@ -10,7 +10,7 @@ from keras.models import load_model
 from collections import deque
 import numpy as np
 
-sampleLength = 48
+sampleLength = 32
 
 
 def arm_and_takeoff(vehicle,aTargetAltitude):

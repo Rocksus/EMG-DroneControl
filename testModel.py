@@ -4,7 +4,7 @@ from collections import deque
 import myo
 import numpy as np
 
-sampleLength = 48
+sampleLength = 32
 
 #Listener Class
 class Listener(myo.DeviceListener):

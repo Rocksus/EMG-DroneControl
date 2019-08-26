@@ -5,6 +5,7 @@ import os
 from keras.utils import np_utils, plot_model
 import matplotlib.pyplot as plt
 
+saveModel = True
 sampleLength = 32
 
 def createCNNLSTM(cnn1, cnn2, lstm):
@@ -75,7 +76,7 @@ trainY = np_utils.to_categorical(trainY)
 # Shuffle data to remove overfitting
 trainX, trainY = shuffleData(trainX, trainY)
 
-model_nodes = ['32_Length_Sample_32_32_16', '32_Length_Sample_64_32_16', '32_Length_Sample_64_64_32', '32_Length_Sample_128_64_32', '48_Length_Sample_32_32_16', '48_Length_Sample_64_32_16', '48_Length_Sample_64_64_32', '48_Length_Sample_128_64_32']
+model_nodes = ['32_Length_Sample_32_32_16', '32_Length_Sample_64_32_16', '32_Length_Sample_64_64_32', '32_Length_Sample_128_64_32']
 
 # Empty variable to contain array of models
 models = []
@@ -85,10 +86,12 @@ models.append(createCNNLSTM(64,64,32))
 models.append(createCNNLSTM(128,64,32))
 
 histories = []
-for model in models:
+for model, model_name in zip(models, model_nodes):
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 	history = model.fit(trainX, trainY,validation_split=0.33, epochs=225, batch_size=32, shuffle=True)
 	histories.append(history)
+	if(saveModel):
+		model.save(model_name+'.h5')
 
 for history, savefile in zip(histories, model_nodes):
 	# Plot training & validation accuracy values
@@ -161,7 +164,7 @@ for model, model_profile in zip(models,model_nodes):
 			prediction = model.predict_classes(data)
 			if(gesture_names[prediction[0]]==gestureName):
 				count=count+1
-		acc = count/classificationRange * 100
+		acc = count/len(gesture) * 100
 		print('Gesture (' + gestureName + '): '  + str(acc)+'%')
 		acc_gestures.append(acc)
 	model_acc.append(acc_gestures)

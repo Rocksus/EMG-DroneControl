@@ -70,7 +70,7 @@ trainX, trainY = shuffleData(trainX, trainY)
 # setup model
 # create and fit the LSTM network
 model = Sequential()
-model.add(Conv1D(64, kernel_size=3, activation='relu', input_shape = (sampleLength, 8)))
+model.add(Conv1D(32, kernel_size=3, activation='relu', input_shape = (sampleLength, 8)))
 model.add(Dropout(rate=0.5))
 model.add(Conv1D(32, kernel_size=3, activation='relu'))
 model.add(Dropout(rate=0.5))
