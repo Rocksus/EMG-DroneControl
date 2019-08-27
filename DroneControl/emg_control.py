@@ -35,7 +35,7 @@ def arm_and_takeoff(vehicle,aTargetAltitude):
 
 	# Confirm vehicle armed before attempting to take off
 	while not vehicle.armed:
-		print (" Waiting for arming...")
+		print ("Waiting for arming...")
 		vehicle.armed = True
 		time.sleep(1)
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
 	print('Loading Model...')
 	# Load Model
-	model = load_model('../EMG_Model_CNN_RNN.h5')
+	model = load_model('../32_Length_Sample_64_64_32.h5')
 
 	# View summary of model
 	model.summary()
