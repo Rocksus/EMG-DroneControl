@@ -48,31 +48,6 @@ class Listener(myo.DeviceListener):
 		if(self.record_emg):
 			self.emg_data.append(self.emg)
 
-	# def on_orientation(self, event):
-	# 	with self.lock:
-	# 		self.orientation = event.orientation
-	# 		if(self.output_enabled):
-	# 			self.output()
-
-	# def on_paired(self, event): pass
-	# def on_unpaired(self, event): pass
-	# def on_disconnected(self, event): pass
-
-	# def on_arm_synced(self, event):
-	# 	self.disabled = False
-
-	# def on_arm_unsynced(self, event):
-	# 	print('Sync lost! Sync back Myo!')
-	# 	self.disabled = True
-
-	# def on_unlocked(self, event): pass
-	# def on_locked(self, event): pass
-	# def on_pose(self, event): pass
-	# def on_rssi(self, event): pass
-	# def on_battery_level(self, event): pass
-	# def on_warmup_completed(self, event): pass
-
-
 if __name__ == '__main__':
 	myo.init(sdk_path='myo-sdk-win-0.9.0')
 	hub = myo.Hub()
