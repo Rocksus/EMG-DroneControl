@@ -15,6 +15,14 @@ from pymavlink import mavutil # Needed for command message definitions
 import time
 import math
 
+# Myo
+import myo
+# Keras Neural Network
+from keras.models import load_model
+from collections import deque
+import numpy as np
+
+
 # Set up option parsing to get connection string
 import argparse
 parser = argparse.ArgumentParser(description='Control Copter and send commands in GUIDED mode ')
@@ -151,7 +159,7 @@ def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
     return [w, x, y, z]
 
 # Take off 2.5m in GUIDED_NOGPS mode.
-arm_and_takeoff_nogps(2.5)
+arm_and_takeoff_nogps(1)
 
 # Hold the position for 3 seconds.
 print("Hold position for 3 seconds")

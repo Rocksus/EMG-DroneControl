@@ -27,7 +27,7 @@ class Listener(myo.DeviceListener):
 #Init main
 if __name__ == '__main__':
 	#Load Model
-	model = load_model('EMG_Model_CNN_RNN.h5')
+	model = load_model('32_length_sample_16lstm.h5')
 
 	# Summarize Model
 	model.summary()

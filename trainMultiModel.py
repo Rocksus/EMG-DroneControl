@@ -10,11 +10,14 @@ sampleLength = 32
 
 def createCNNLSTM(cnn1, cnn2, lstm):
 	model = Sequential()
-	model.add(Conv1D(cnn1, kernel_size=3, activation='relu', input_shape = (sampleLength, 8)))
-	model.add(Dropout(rate=0.5))
-	model.add(Conv1D(cnn2, kernel_size=3, activation='relu'))
-	model.add(Dropout(rate=0.5))
-	model.add(LSTM(lstm, return_sequences=True))
+	if(cnn1>0):
+		model.add(Conv1D(cnn1, kernel_size=3, activation='relu', input_shape = (sampleLength, 8)))
+		model.add(Dropout(rate=0.5))
+	if(cnn2>0):
+		model.add(Conv1D(cnn2, kernel_size=3, activation='relu'))
+		model.add(Dropout(rate=0.5))
+	if(lstm>0):
+		model.add(LSTM(lstm, return_sequences=True))
 	model.add(Flatten())
 	model.add(Dense(num_gestures, activation='softmax'))
 	return model
@@ -73,10 +76,24 @@ trainY = np_utils.to_categorical(trainY)
 # Shuffle data to remove overfitting
 trainX, trainY = shuffleData(trainX, trainY)
 
-model_nodes = ['32_Length_Sample_32_32_16', '32_Length_Sample_64_32_16', '32_Length_Sample_64_64_32', '32_Length_Sample_128_64_32']
+model_nodes = ['32_length_Sample_32cnn', '32_length_sample_64cnn', '32_length_sample_128cnn','32_length_sample_32_32cnn', '32_length_sample_16lstm','32_length_sample_32lstm','32_length_sample_64lstm', '32_Length_Sample_32_32_16', '32_Length_Sample_64_32_16', '32_Length_Sample_64_64_32', '32_Length_Sample_128_64_32']
 
 # Empty variable to contain array of models
 models = []
+# Single Layer CNN Models
+models.append(createCNNLSTM(32,0,0))
+models.append(createCNNLSTM(64,0,0))
+models.append(createCNNLSTM(128,0,0))
+
+# Double Layer CNN Model
+models.append(createCNNLSTM(32,32,0))
+
+# Single Layer RNN LSTM Model
+models.append(createCNNLSTM(0,0,16))
+models.append(createCNNLSTM(0,0,32))
+models.append(createCNNLSTM(0,0,64))
+
+# Multi Layer CNN-RNN Model
 models.append(createCNNLSTM(32,32,16))
 models.append(createCNNLSTM(64,32,16))
 models.append(createCNNLSTM(64,64,32))
