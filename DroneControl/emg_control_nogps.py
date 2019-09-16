@@ -10,6 +10,8 @@ from collections import deque
 import numpy as np
 # Set up option parsing to get connection string
 import argparse
+
+import keyboard
 parser = argparse.ArgumentParser(description='Control Copter and send commands in GUIDED mode ')
 parser.add_argument('--connect',
 				   help="Vehicle connection target string. If not specified, SITL automatically started and used.")
@@ -148,6 +150,8 @@ if __name__ == '__main__':
 	sitl = None
 	gesture_names = ['Rest', 'Fist', 'Hold_Left', 'Hold_Right', 'Flower', 'Finger_Spread','Metal','Thumbs_Up','Peace']
 
+	THRUST_VAL = 8
+
 	myo.init(sdk_path='../myo-sdk-win-0.9.0')
 	hub = myo.Hub()
 	listener = Listener()
@@ -185,22 +189,22 @@ if __name__ == '__main__':
 			pass
 		elif(gesture_names[prediction[0]]=='Fist'):
 			# Go Down
-			set_attitude(thrust=-0.5)
+			set_attitude(thrust=-0.2)
 		elif(gesture_names[prediction[0]]=='Hold_Left'):
 			# Tilt Left
-			set_attitude(roll_angle = 5, thrust = 0.5)
+			set_attitude(roll_angle = THRUST_VAL, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Hold_Right'):
 			# Tilt Right
-			set_attitude(roll_angle = -5, thrust = 0.5)
+			set_attitude(roll_angle = -THRUST_VAL, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Flower'):
 			# Move Back
-			set_attitude(pitch_angle = 5, thrust = 0.5)
+			set_attitude(pitch_angle = THRUST_VAL, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Finger_Spread'):
 			# Go Up
-			set_attitude(thrust=0.5)
+			set_attitude(thrust=+0.2)
 		elif(gesture_names[prediction[0]]=='Metal'):
 			# Move Forward		
-			set_attitude(pitch_angle = -5, thrust = 0.5)
+			set_attitude(pitch_angle = -THRUST_VAL, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Thumbs_Up'):
 			if not vehicle_flying:
 				arm_and_takeoff_nogps(0.5)
@@ -210,6 +214,8 @@ if __name__ == '__main__':
 			print("Landing Mode")
 			vehicle.mode = VehicleMode("LAND")
 			vehicle_flying = False
+		elif(keyboard.is_pressed('esc')):
+			break
 
 	# Shut down simulator if it was started.
 	if sitl is not None:
