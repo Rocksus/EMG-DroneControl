@@ -180,7 +180,9 @@ if __name__ == '__main__':
 		emg = emg.reshape(1, emg.shape[0], emg.shape[1])
 		prediction = model.predict_classes(emg)
 		print('['+str(prediction[0])+']: '+gesture_names[prediction[0]])	
-		if vehicle.mode == VehicleMode("LAND"):
+		if keyboard.is_pressed('esc') and not vehicle_flying:
+			break
+		elif vehicle.mode == VehicleMode("LAND"):
 			vehicle_flying = False
 
 		if(gesture_names[prediction[0]]=='Rest'):
@@ -214,8 +216,6 @@ if __name__ == '__main__':
 			print("Landing Mode")
 			vehicle.mode = VehicleMode("LAND")
 			vehicle_flying = False
-		elif(keyboard.is_pressed('esc')):
-			break
 
 	# Shut down simulator if it was started.
 	if sitl is not None:
