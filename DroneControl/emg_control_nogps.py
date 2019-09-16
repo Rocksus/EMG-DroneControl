@@ -203,7 +203,7 @@ if __name__ == '__main__':
 			set_attitude(pitch_angle = THRUST_VAL, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Finger_Spread'):
 			# Go Up
-			set_attitude(thrust=+0.2)
+			set_attitude(thrust=0.8)
 		elif(gesture_names[prediction[0]]=='Metal'):
 			# Move Forward		
 			set_attitude(pitch_angle = -THRUST_VAL, thrust = 0.5)
