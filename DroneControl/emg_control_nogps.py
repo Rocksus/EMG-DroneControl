@@ -1,26 +1,21 @@
-#!/usr/bin/env python
-
-"""
-set_attitude_target.py: (Copter Only)
-This example shows how to move/direct Copter and send commands
- in GUIDED_NOGPS mode using DroneKit Python.
-Caution: A lot of unexpected behaviors may occur in GUIDED_NOGPS mode.
-		Always watch the drone movement, and make sure that you are in dangerless environment.
-		Land the drone as soon as possible when it shows any unexpected behavior.
-Tested in Python 2.7.10
-"""
-
 from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelative
 from pymavlink import mavutil # Needed for command message definitions
 import time
 import math
-
+# Myo
+import myo
+# Keras Neural Network
+from keras.models import load_model
+from collections import deque
+import numpy as np
 # Set up option parsing to get connection string
 import argparse
 parser = argparse.ArgumentParser(description='Control Copter and send commands in GUIDED mode ')
 parser.add_argument('--connect',
 				   help="Vehicle connection target string. If not specified, SITL automatically started and used.")
 args = parser.parse_args()
+
+sampleLength = 32
 
 def arm_and_takeoff_nogps(aTargetAltitude):
 	"""
@@ -165,7 +160,7 @@ if __name__ == '__main__':
 
 	# Load Model
 	model = load_model('../32_Length_Sample_64_64_32.h5')
-
+	vehicle_flying = False
 	# View summary of model
 	model.summary()
 
@@ -186,31 +181,29 @@ if __name__ == '__main__':
 
 		if(gesture_names[prediction[0]]=='Rest'):
 			# Reset attitude, or it will persist for 1s more due to the timeout
-			send_attitude_target(0, 0,
-								 0, 0, True,
-								 thrust)
+			send_attitude_target(0, 0, 0, 0, True, thrust=0.5)
 			pass
 		elif(gesture_names[prediction[0]]=='Fist'):
 			# Go Down
 			set_attitude(thrust=-0.5)
 		elif(gesture_names[prediction[0]]=='Hold_Left'):
 			# Tilt Left
-			set_attitude(roll_angle = 5, thrust = 0.5, duration = 3.21)
+			set_attitude(roll_angle = 5, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Hold_Right'):
 			# Tilt Right
-			set_attitude(roll_angle = -5, thrust = 0.5, duration = 3.21)
+			set_attitude(roll_angle = -5, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Flower'):
 			# Move Back
-			set_attitude(pitch_angle = 5, thrust = 0.5, duration = 3.21)
+			set_attitude(pitch_angle = 5, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Finger_Spread'):
 			# Go Up
 			set_attitude(thrust=0.5)
 		elif(gesture_names[prediction[0]]=='Metal'):
 			# Move Forward		
-			set_attitude(pitch_angle = -5, thrust = 0.5, duration = 3.21)
+			set_attitude(pitch_angle = -5, thrust = 0.5)
 		elif(gesture_names[prediction[0]]=='Thumbs_Up'):
 			if not vehicle_flying:
-				arm_and_takeoff(vehicle, 10)
+				arm_and_takeoff_nogps(0.5)
 				if vehicle.armed:
 					vehicle_flying=True
 		elif(gesture_names[prediction[0]]=='Peace'):
