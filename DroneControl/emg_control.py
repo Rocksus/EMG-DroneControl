@@ -21,7 +21,7 @@ def arm_and_takeoff(vehicle,aTargetAltitude):
 	print ("Basic pre-arm checks")
 
 	# Don't try to arm until autopilot is ready
-	# Except when you are feeling reckless****
+	# Except when you are feeling reckless*
 	# And being reckless is fun.
 
 	# while not vehicle.is_armable:

@@ -107,6 +107,6 @@ plt.legend(['Train', 'Test'], loc='upper left')
 plt.tight_layout()
 
 # Save model to file for testing
-model.save('EMG_Model_CNN_RNN.h5')
+model.save('Models/EMG_Model_CNN_RNN.h5')
 
 plt.show()

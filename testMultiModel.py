@@ -48,7 +48,7 @@ models = []
 
 # Load all model
 for model in model_nodes:
-	models.append(load_model(model+'.h5'))
+	models.append(load_model('Models/'+model+'.h5'))
 
 # Singular Classification for each model
 gestureX = []
