@@ -5,14 +5,16 @@ This is a project that I made to complete my undergraduate studies in computer e
 # Overview
 
 Model is trained using 8 EMG points, here's an example of a gesture data:
+
 ![image](https://user-images.githubusercontent.com/21309983/113470789-53f29c00-9482-11eb-935b-0edf120aeb8b.png)
+<br />
+
 Data is then processed into a several Neural Network Model with different configurations.
 
 Working model was then tested using a real drone / simulated environment.
+
 ![image](https://user-images.githubusercontent.com/21309983/113470829-9ddb8200-9482-11eb-96e3-609265fd06a9.png)
 ![image](https://user-images.githubusercontent.com/21309983/113470834-a59b2680-9482-11eb-854d-4763c5e62118.png)
-
-
 
 # Model Results
 
